@@ -4,6 +4,10 @@ public class Cache {
     public ArrayList<Cell> cells;
 
     public Cache(ArrayList<Cell> cells) {
-        this.cells = new ArrayList<>();
+        if(cells.size() > 4){
+            throw new IllegalArgumentException("Cache can only have up to 4 cells");
+        } else {
+            this.cells = new ArrayList<>();
+        }
     }
 }
