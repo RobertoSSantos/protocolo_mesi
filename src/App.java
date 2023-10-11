@@ -26,8 +26,5 @@ public class App {
 
         ram.read(p1, 20, 0);
         
-
-
-        
     }
 }
