@@ -1,6 +1,6 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        
+        //Grupo: Gabriel Souza Dunkel, Pedro Martins de Oliveira Menezes, Roberto Souza Santos    
         //Inicializando processador 1
         Cell c1 = new Cell();
         Cell c2 = new Cell();
@@ -19,12 +19,18 @@ public class App {
         Cell[] cells2 = {c5,c6,c7,c8};
         
         Cache mc2 = new Cache(cells2);
-        Processor p2 = new Processor(1,mc2);
+        Processor p2 = new Processor(2,mc2);
 
         Processor[] processors = {p1, p2};
         Ram ram = new Ram(processors);
 
         ram.read(p1, 20, 0);
-        
+        ram.read(p2, 10, 0);
+        ram.read(p2, 15, 0);
+        ram.read(p1, 10, 0);
+        ram.write(p1, 20, 0);
+        ram.write(p2, 10, 0);
+        ram.write(p2, 20, 0);
+        ram.write(p1, 10, 0);
     }
 }

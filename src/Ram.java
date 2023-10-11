@@ -5,8 +5,12 @@ public class Ram {
     public Ram( Processor[] processors) {
         this.ends = new Boolean[32];
         this.processors = processors;
+        for (int i=0; i<32; i++){
+            ends[i]=false;
+        }
     }
 
+    //troca de processador
     public Processor changeProcessor(Processor processor){
         for(Processor p : this.processors)
             if(!processor.equals(p)){
@@ -16,6 +20,7 @@ public class Ram {
         return null;
     }
 
+    //buscar a celula de cache que armazena um dado endereço de memória
     public Cell find_cell(Processor processor, int memAdd){
         for(Cell c : processor.getCache().cells){
             if(c.getValue() == memAdd){
@@ -28,7 +33,7 @@ public class Ram {
 
     public void read(Processor processor, int memAdd, int cell){
         if(!this.ends[memAdd]){
-            if(processor.getCache().cells[cell].getTag() == Tags.INVALIDA){
+            if(processor.getCache().cells[cell].getTag() == Tags.INVALIDA){//celula disponível
                 processor.getCache().cells[cell].setTag(Tags.EXCLUSIVA);
                 processor.getCache().cells[cell].setValue(memAdd);
                 System.out.println("Leitura Realizada");
@@ -38,7 +43,7 @@ public class Ram {
         } else {
             switch (processor.getCache().cells[cell].getTag()){
                 case MODIFICADA:
-                    processor.getCache().cells[cell].setTag(Tags.MODIFICADA);
+                    processor.getCache().cells[cell].setTag(Tags.COMPARTILHADA);
                     System.out.println("Falha de Leitura - Alteracao de estado Compartilhado");
                     break;
                 case EXCLUSIVA:
@@ -88,7 +93,7 @@ public class Ram {
 
     public void write(Processor processor, int memAdd, int cell){
         if(!this.ends[memAdd]){
-            if(processor.getCache().cells[cell].getTag() == Tags.INVALIDA){
+            if(processor.getCache().cells[cell].getTag() == Tags.INVALIDA){//celula disponível
                 processor.getCache().cells[cell].setTag(Tags.MODIFICADA);
                 processor.getCache().cells[cell].setValue(memAdd);
             }
