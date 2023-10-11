@@ -1,11 +1,10 @@
 public class Cell {
     private Tags tag;
     private int value;
-    private int endMemoria;
 
-    public Cell(int value, int endMemoria){
-        this.value = value;
-        this.endMemoria = endMemoria;
+    public Cell(){
+        this.value = 0;
+        this.tag = Tags.INVALIDA;
     }
 
     public Tags getTag() {
@@ -24,11 +23,10 @@ public class Cell {
         this.value = value;
     }
 
-    public int getEndMemoria() {
-        return endMemoria;
-    }
-
-    public void setEndMemoria(int endMemoria) {
-        this.endMemoria = endMemoria;
+    @Override
+    public String toString(){
+        return "Cell: " +
+                "tag = " + this.tag +
+                ", value = " + this.value;
     }
 }
